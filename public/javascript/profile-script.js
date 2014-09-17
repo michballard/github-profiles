@@ -15,9 +15,6 @@ $(document).ready(function(){
 			}).fail(function(){
 				alert('This github profile does not exist.')
 			});
-		
-	
-
 			$.get(url, function(user){
 				$('.' + user.login).on('click', function(){
 					$(this).parent().parent().remove();
