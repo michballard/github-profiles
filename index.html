@@ -8,7 +8,7 @@
 </head>
 <body>
 	<main>
-		<form>
+		<form id="add-profile">
 			<input type="text" placeholder="Github username" id="username"></input>
 			<button id="submit-button">Submit</button>
 		</form>
@@ -22,8 +22,19 @@
 				<p><strong>Followers: 21</strong></p>
 				<p><strong>Repositories: 21</strong></p>
 			</section>
-
 		</article>
+		<script type="text/javascript" src="public/javascript/jquery-1.11.1.js"></script>
+		<script>
+		$(document).ready(function(){
+			$('#add-profile').on('submit', function(e){
+				e.preventDefault();
+			var url = 'https://api.github.com/users/' + $('#username').val() + "?access_token=c096d7e1be4d646f127c759c4c644ed2d6753276";
+			var userData = $.get(url, function(user){
+				user
+			})
+			});			
+		});
+		</script>
 	</main>
 </body>
 </html>
