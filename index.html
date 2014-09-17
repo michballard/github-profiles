@@ -13,27 +13,39 @@
 	</form>
 	<main class="profile-container">	
 
-		<article class="profile">
+	<template id="profile-template">
+		<article class="profile" id="{{login}}">
 			<section class="image">
-				<img src="public/images/lizard.png">
+				<img src="{{avatar_url}}">
 			</section>
 			<section class="statistics">
-				<h3>Michelle Ballard</h3>
-				<p><strong>Followers: 21</strong></p>
-				<p><strong>Repositories: 21</strong></p>
+				<h3><a href="https://github.com/{{login}}">{{login}}</a></h3>
+				<p><strong>Followers: {{followers}}</strong></p>
+				<p><strong>Repositories: {{public_repos}} + </strong></p>
+				<button class= "remove-profile" id="{{login}}">Remove</button>
 			</section>
-		</article>
+		</article>').appendTo('.profile-container'
+	</template>
 
 		<script type="text/javascript" src="public/javascript/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="public/javascript/mustache.js"></script>
 		<script>
 		$(document).ready(function(){
 			$('#add-profile').on('submit', function(e){
 				e.preventDefault();
 			var url = 'https://api.github.com/users/' + $('#username').val() + "?access_token=c096d7e1be4d646f127c759c4c644ed2d6753276";
 			var userData = $.get(url, function(user){
-				$('<article class="profile"><section class="image"><img src="' + user.avatar_url + '"></section><section class="statistics"><h3>' + user.login + '</h3><p><strong>Followers: ' + user.followers + '</strong></p><p><strong>Repositories:' + user.public_repos + '</strong></p></section></article>').appendTo('.profile-container');
+				$('<article class="profile" id="'+ user.login + '"><section class="image"><img src="' + user.avatar_url + '"></section><section class="statistics"><h3>' + '<a href="https://github.com/' + user.login + '">' + user.login + '</a></h3><p><strong>Followers: ' + user.followers + '</strong></p><p><strong>Repositories:' + user.public_repos + '</strong></p><button class= "remove-profile" id="' + user.login + '">Remove</button></section></article>').appendTo('.profile-container');
+				}).always(function(){
+					$('#username').val('');
+				}).fail(function(){
+					alert('This github profile does not exist.')
 				});
-			});			
+				$('article #jjromeo').on('click', function(){
+					console.log(this)
+				})
+			});
+
 		});
 		</script>
 
