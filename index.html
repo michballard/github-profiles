@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="public/css/style.css">
 </head>
 <body>
+
 	<form id="add-profile">
 		<input type="text" placeholder="Github username" id="username"></input>
 		<button id="submit-button">Submit</button>
@@ -22,33 +23,14 @@
 				<h3><a href="https://github.com/{{login}}">{{login}}</a></h3>
 				<p><strong>Followers: {{followers}}</strong></p>
 				<p><strong>Repositories: {{public_repos}} + </strong></p>
-				<button class= "remove-profile" id="{{login}}">Remove</button>
+				<button class= "remove-profile {{login}}">Remove</button>
 			</section>
 		</article> 
 	</template>
 
-		<script type="text/javascript" src="public/javascript/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="public/javascript/mustache.js"></script>
-		<script>
-		$(document).ready(function(){
-			$('#add-profile').on('submit', function(e){
-				e.preventDefault();
-			var url = 'https://api.github.com/users/' + $('#username').val() + "?access_token=8bf19aa201701b7d56ee9b4125c9647a39dd766c";
-			var userData = $.get(url, function(user){
-				var template = $('#profile-template').html();
-				$('.profile-container').append(Mustache.render(template, user));
-				}).always(function(){
-					$('#username').val('');
-				}).fail(function(){
-					alert('This github profile does not exist.')
-				});
-				$('article #jjromeo').on('click', function(){
-					console.log(this)
-				})
-			});
-
-		});
-		</script>
+	<script type="text/javascript" src="public/javascript/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="public/javascript/mustache.js"></script>
+	<script type="text/javascript" src="public/javascript/profile-script.js"></script>
 
 	</main>
 </body>
