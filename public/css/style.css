@@ -13,13 +13,27 @@ article {
 	width: 350px;
 	background-color: rgba(100,100,100,0.5);
 	margin: 10px;
+	padding-left: 10px;
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
 	-moz-box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
 	box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
 }
 
+.profile .image {
+	padding-bottom: 15px;
+}
+
+.profile .statistics {
+	float: right;
+	padding-right: 25px;
+	padding-top: 10px;
+}
+
 img {
-	border-radius: 100px;
+	border-radius: 20px;
+	height: 130px;
+	border: 5px solid white;
+	margin-top: 10px;
 }
 
 form {

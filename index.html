@@ -7,22 +7,23 @@
 	<link rel="stylesheet" type="text/css" href="public/css/style.css">
 </head>
 <body>
-	<main>
-		<form id="add-profile">
-			<input type="text" placeholder="Github username" id="username"></input>
-			<button id="submit-button">Submit</button>
-		</form>
-		<article>
-			<section class="profile-image">
+	<form id="add-profile">
+		<input type="text" placeholder="Github username" id="username"></input>
+		<button id="submit-button">Submit</button>
+	</form>
+	<main class="profile-container">	
+
+		<article class="profile">
+			<section class="image">
 				<img src="public/images/lizard.png">
 			</section>
-
-			<section class="profiles">
+			<section class="statistics">
 				<h3>Michelle Ballard</h3>
 				<p><strong>Followers: 21</strong></p>
 				<p><strong>Repositories: 21</strong></p>
 			</section>
 		</article>
+
 		<script type="text/javascript" src="public/javascript/jquery-1.11.1.js"></script>
 		<script>
 		$(document).ready(function(){
@@ -30,11 +31,12 @@
 				e.preventDefault();
 			var url = 'https://api.github.com/users/' + $('#username').val() + "?access_token=c096d7e1be4d646f127c759c4c644ed2d6753276";
 			var userData = $.get(url, function(user){
-				user
-			})
+				$('<article class="profile"><section class="image"><img src="' + user.avatar_url + '"></section><section class="statistics"><h3>' + user.login + '</h3><p><strong>Followers: ' + user.followers + '</strong></p><p><strong>Repositories:' + user.public_repos + '</strong></p></section></article>').appendTo('.profile-container');
+				});
 			});			
 		});
 		</script>
+
 	</main>
 </body>
 </html>
